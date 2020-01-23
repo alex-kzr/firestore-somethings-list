@@ -17,7 +17,7 @@
         </div>
         <script>
             // Web app's Firebase configuration
-            var firebaseConfig = {
+            var config = {
                 apiKey: "AIzaSyBhesErlhERxhgDQBv-73mYm9e67Ek9CU8",
                 authDomain: "fb-test-app-1.firebaseapp.com",
                 databaseURL: "https://fb-test-app-1.firebaseio.com",
@@ -27,9 +27,9 @@
                 appId: "1:772425047794:web:5c1cbe1a34f8371e4cba6b"
             };
             // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
+            firebase.initializeApp(config);
             const db = firebase.firestore();
-            db.setting({ timestampsInSnapshots: true});
+            db.settings({});
         </script>
         <script src="app.js"></script>
     </body>
