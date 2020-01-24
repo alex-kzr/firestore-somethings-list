@@ -31,4 +31,6 @@ somethingAddForm.addEventListener('submit', (e) => {
         name: somethingAddForm.name.value,
         note: somethingAddForm.note.value
     });
+    somethingAddForm.name.value = '';
+    somethingAddForm.note.value = '';
 });
