@@ -1,4 +1,5 @@
 const somethingList = document.querySelector("#something-list");
+const somethingAddForm = document.querySelector('#something-add-form');
 
 // create element and render something
 function renderSomething(doc){
@@ -16,9 +17,18 @@ function renderSomething(doc){
     somethingList.appendChild(li);
 }
 
+// getting data
 db.collection('somethings').get().then((snapshot) => {
-    //console.log(snapshot.docs);
     snapshot.docs.forEach(doc => {
         renderSomething(doc);
+    });
+});
+
+// saving data
+somethingAddForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    db.collection('somethings').add({
+        name: somethingAddForm.name.value,
+        note: somethingAddForm.note.value
     });
 });
