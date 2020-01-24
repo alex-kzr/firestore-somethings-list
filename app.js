@@ -28,7 +28,7 @@ function renderSomething(doc){
 }
 
 // getting data
-db.collection('somethings').get().then((snapshot) => {
+db.collection('somethings').where('name', '==', 'something1').get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
         renderSomething(doc);
     });
