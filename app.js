@@ -6,15 +6,25 @@ function renderSomething(doc){
     let li = document.createElement('li');
     let name = document.createElement('span');
     let note = document.createElement('span');
+    let cross = document.createElement('div');
 
     li.setAttribute('data-id', doc.id);
     name.textContent = doc.data().name;
     note.textContent = doc.data().name;
+    cross.textContent = 'x';
 
     li.appendChild(name);
     li.appendChild(note);
+    li.appendChild(cross);
 
     somethingList.appendChild(li);
+
+    // delete data
+    cross.addEventListener('click',(e) => {
+        e.stopPropagation();
+        let id = e.target.parentElement.getAttribute('data-id');
+        db.collection('somethings').doc(id).delete();
+    });
 }
 
 // getting data
