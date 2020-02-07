@@ -10,7 +10,7 @@ function renderSomething(doc){
 
     li.setAttribute('data-id', doc.id);
     name.textContent = doc.data().name;
-    note.textContent = doc.data().name;
+    note.textContent = doc.data().note;
     cross.textContent = 'x';
 
     li.appendChild(name);
@@ -28,7 +28,7 @@ function renderSomething(doc){
 }
 
 // getting data
-db.collection('somethings').where('name', '==', 'something1').get().then((snapshot) => {
+db.collection('somethings').where('name', '>=', 'something').orderBy('name').get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
         renderSomething(doc);
     });
