@@ -1,4 +1,4 @@
-const somethingList = document.querySelector("#something-list");
+const somethingList = document.querySelector('#something-list');
 const somethingAddForm = document.querySelector('#something-add-form');
 
 // create element and render something
@@ -28,11 +28,11 @@ function renderSomething(doc){
 }
 
 // getting data
-db.collection('somethings').where('name', '>=', 'something').orderBy('name').get().then((snapshot) => {
-    snapshot.docs.forEach(doc => {
-        renderSomething(doc);
-    });
-});
+// db.collection('somethings').orderBy('name').get().then((snapshot) => {
+//     snapshot.docs.forEach(doc => {
+//         renderSomething(doc);
+//     });
+// });
 
 // saving data
 somethingAddForm.addEventListener('submit', (e) => {
@@ -43,4 +43,17 @@ somethingAddForm.addEventListener('submit', (e) => {
     });
     somethingAddForm.name.value = '';
     somethingAddForm.note.value = '';
+});
+
+// real-time listener
+db.collection('somethings').orderBy('name').onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+        if(change.type == 'added'){
+            renderSomething(change.doc);
+        } else if (change.type == 'removed'){
+            let li = somethingList.querySelector('[data-id=' + change.doc.id + ']');
+            somethingList.removeChild(li);
+        }
+    });
 });
